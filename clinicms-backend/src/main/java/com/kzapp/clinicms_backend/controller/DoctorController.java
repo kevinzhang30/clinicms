@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kzapp.clinicms_backend.dto.DoctorDto;
 import com.kzapp.clinicms_backend.service.DoctorService;
 
+import lombok.AllArgsConstructor;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/doctors")
+@AllArgsConstructor
 public class DoctorController {
     private DoctorService doctorService;
     // Build Add Doctor REST API
@@ -41,7 +47,7 @@ public class DoctorController {
     }
 
     // Build Update Doctor REST API
-    @PostMapping("{id}")
+    @PutMapping("{id}")
     public ResponseEntity<DoctorDto> updateDoctor(@PathVariable("id") Long id, @RequestBody DoctorDto doctorDto) {
         DoctorDto updatedDoctor = doctorService.updateDoctor(id, doctorDto);
         return ResponseEntity.ok(updatedDoctor);

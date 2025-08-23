@@ -15,7 +15,7 @@ main {
 }
 
 .navbar-glass {
-  background-color: rgba(38, 100, 136, 0.5);  /* translucent */
+  background-color: rgba(38, 100, 136, 0.42);  /* translucent */
   backdrop-filter: blur(10px);            /* frosted glass blur */
   -webkit-backdrop-filter: blur(10px);    /* Safari support */
 }

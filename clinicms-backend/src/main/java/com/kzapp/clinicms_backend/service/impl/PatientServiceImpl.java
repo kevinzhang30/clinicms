@@ -4,9 +4,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.kzapp.clinicms_backend.dto.PatientDto;
+import com.kzapp.clinicms_backend.entity.Doctor;
 import com.kzapp.clinicms_backend.entity.Patient;
 import com.kzapp.clinicms_backend.exception.ResourceNotFoundException;
 import com.kzapp.clinicms_backend.mapper.PatientMapper;
+import com.kzapp.clinicms_backend.repository.DoctorRepository;
 import com.kzapp.clinicms_backend.repository.PatientRepository;
 import com.kzapp.clinicms_backend.service.PatientService;
 
@@ -16,9 +18,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;
+
+    private DoctorRepository doctorRepository;
     @Override
     public PatientDto createPatient(PatientDto patientDto) {
         Patient patient = PatientMapper.mapToPatient(patientDto);
+        Doctor doctor = doctorRepository.findById(patientDto.getDoctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " + patientDto.getDoctorId()));
+        patient.setDoctor(doctor); // Set the doctor for the patient
         Patient savedPatient = patientRepository.save(patient);
         return PatientMapper.mapToPatientDto(savedPatient);
     }
@@ -47,6 +54,10 @@ public class PatientServiceImpl implements PatientService{
         existingPatient.setLastName(patientDto.getLastName());
         existingPatient.setPhoneNum(patientDto.getPhoneNum());
         existingPatient.setEmail(patientDto.getEmail());
+
+        Doctor doctor = doctorRepository.findById(patientDto.getDoctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " + patientDto.getDoctorId()));
+        existingPatient.setDoctor(doctor); // Set the doctor for the patient
         
         Patient updatedPatient = patientRepository.save(existingPatient);
 

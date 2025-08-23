@@ -10,7 +10,8 @@ public class PatientMapper {
             patient.getFirstName(),
             patient.getLastName(),
             patient.getPhoneNum(),
-            patient.getEmail()
+            patient.getEmail(),
+            patient.getDoctor().getId()
         );
     }
 

@@ -18,6 +18,9 @@ const HeaderComponent = () => {
                 <li className="nav-item">
                   <a className="nav-link" href="/patients">Patients</a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/doctors">Doctors</a>
+                </li>
               </ul>
             </div>
           </div>

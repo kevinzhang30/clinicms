@@ -2,13 +2,18 @@ package com.kzapp.clinicms_backend.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kzapp.clinicms_backend.dto.DoctorDto;
 import com.kzapp.clinicms_backend.entity.Doctor;
 import com.kzapp.clinicms_backend.mapper.DoctorMapper;
 import com.kzapp.clinicms_backend.repository.DoctorRepository;
 import com.kzapp.clinicms_backend.service.DoctorService;
 
+import lombok.AllArgsConstructor;
 
+@Service
+@AllArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
     private DoctorRepository doctorRepository;
@@ -32,13 +37,13 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorDto> getAllDoctorsDto() {
-        return doctorRepository.findAll().stream()
-                .map(DoctorMapper::mapToDoctorDto)
-                .toList();
-        // List<Doctor> doctors = doctorRepository.findAll();
-        // return doctors.stream()
+        // return doctorRepository.findAll().stream()
         //         .map(DoctorMapper::mapToDoctorDto)
         //         .toList();
+        List<Doctor> doctors = doctorRepository.findAll();
+        return doctors.stream()
+                .map(DoctorMapper::mapToDoctorDto)
+                .toList();
     }
 
 

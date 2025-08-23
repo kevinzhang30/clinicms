@@ -15,4 +15,5 @@ public class PatientDto {
     private String lastName;
     private String phoneNum;
     private String email;
+    private Long doctorId; // Assuming you want to include the doctor's ID as well
 }
