@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createDoctor, getDoctor, updateDoctor } from '../services/DoctorService';
 import { useNavigate, useParams } from 'react-router-dom';
+import { specialties } from '../constants/Specialties';
 
 const DoctorComponent = () => {
     const [firstName, setFirstName] = useState('');
@@ -14,20 +15,20 @@ const DoctorComponent = () => {
     const navigator = useNavigate();
     const{id} = useParams();
 
-    const specialties = [
-        "Diagnostic Medicine", // House
-        "Nephrology",          // House
-        "Oncology",            // House
-        "Endocrinology",       // House
-        "Cardiology",
-        "Neurology",
-        "Pediatrics",
-        "Orthopedics",
-        "Dermatology",
-        "Psychiatry",
-        "Gastroenterology",
-        "Radiology"
-    ];
+    // const specialties = [
+    //     "Diagnostic Medicine", // House
+    //     "Nephrology",          // House
+    //     "Oncology",            // House
+    //     "Endocrinology",       // House
+    //     "Cardiology",
+    //     "Neurology",
+    //     "Pediatrics",
+    //     "Orthopedics",
+    //     "Dermatology",
+    //     "Psychiatry",
+    //     "Gastroenterology",
+    //     "Radiology"
+    // ];
 
     const handleFirstName = (e) => setFirstName(e.target.value);
     const handleLastName = (e) => setLastName(e.target.value);

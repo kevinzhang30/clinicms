@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { listDoctors, deleteDoctor } from '../services/DoctorService';
 import { useNavigate } from 'react-router-dom';
+import { specialties } from '../constants/Specialties';
 
 function DoctorListComponent() {
 
@@ -29,6 +30,7 @@ function DoctorListComponent() {
 
     const [doctors, setDoctors] = useState([])
     const navigator = useNavigate();
+    const [selectedSpecialty, setSelectedSpecialty] = useState('');
 
     function addNewDoctor() {
         navigator('/add-doctor');
@@ -56,6 +58,11 @@ function DoctorListComponent() {
     function updateDoctor(id) {
         navigator(`/edit-doctor/${id}`);
     }
+
+    const filteredDoctors = selectedSpecialty
+        ? doctors.filter((doc) => doc.specialty === selectedSpecialty)
+        : doctors;
+
     useEffect(() => {
         listDoctors().then((response) => {
             setDoctors(response.data);
@@ -68,7 +75,20 @@ function DoctorListComponent() {
         <div className='container'>
             <div className="container-fluid mt-5">
                 <h3 className='text-bold text-center'>Doctor List</h3>
-                <button className='btn btn-primary mb-2' onClick={addNewDoctor}>Add Doctor</button>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                <button className='btn btn-dark mb-2' onClick={addNewDoctor}>Add Doctor</button>
+                <select
+                    className="form-select w-auto"
+                    style={{ minWidth: '200px' }}
+                    value={selectedSpecialty}
+                    onChange={(e) => setSelectedSpecialty(e.target.value)}
+                >
+                    <option value="">All Specialties</option>
+                    {specialties.map((spec, idx) => (
+                        <option key={idx} value={spec}>{spec}</option>
+                    ))}
+                </select>
+                </div>
                 <table className="table table-striped table-bordered w-100 px-10">
                     <thead>
                         <tr>
@@ -80,7 +100,7 @@ function DoctorListComponent() {
                         </tr>
                     </thead>
                     <tbody>
-                        {doctors.map((doctor) => (
+                        {filteredDoctors.map((doctor) => (
                             <tr key={doctor.id}>
                                 <td>{doctor.id}</td>
                                 <td>{doctor.firstName}</td>

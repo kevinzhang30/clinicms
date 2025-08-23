@@ -91,7 +91,7 @@ const PatientListComponent = () => {
                     </select>
                 </div> */}
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <button className="btn btn-primary" onClick={addNewPatient}>
+                    <button className="btn btn-dark" onClick={addNewPatient}>
                         Add Patient
                     </button>
 
