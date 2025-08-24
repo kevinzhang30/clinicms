@@ -24,4 +24,4 @@ A full-stack web application designed for managing patients and doctors efficien
 - Patient Notes
 - Patient Contact
 - Appointment Scheduling
-
+- Group data upload and download by .csv file
